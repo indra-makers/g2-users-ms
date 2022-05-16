@@ -17,7 +17,7 @@ public class UserService {
         if(!userRespository.findUserByMail(user.getMail()).isEmpty()){
             throw new BusinessException(ErrorCodes.USER_MAIL_UNIQUE);
         }
-        else if(!userRespository.findUserByUsername(user.getUsername()).isEmpty()){
+        if(!userRespository.findUserByUsername(user.getUsername()).isEmpty()){
             throw new BusinessException(ErrorCodes.USERNAME_UNIQUE);
         }
         userRespository.createUser(user);

@@ -39,8 +39,8 @@ public class UserControllerTest {
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .post(Routes.USER_RESOURCE)
                 .content("{\n" +
-                        "    \"mail\": \"angie.gomez@ucp.edu.co\",\n" +
                         "    \"username\": \"angi3.gom3z\",\n" +
+                        "    \"mail\": \"angie.gomez@ucp.edu.co\",\n" +
                         "    \"displayName\": \"Angicita\",\n" +
                         "    \"idCategoryUser\": 1\n" +
                         "}").contentType(MediaType.APPLICATION_JSON);
@@ -48,7 +48,7 @@ public class UserControllerTest {
         MockHttpServletResponse response = mockMvc.perform(request).andReturn().getResponse();
         Assertions.assertEquals(200, response.getStatus());
 
-        List<User> user = userRespository.findUserByMail("angie.gomez@ucp.edu.co");
+        List<User> user = userRespository.findUserByUsername("angi3.gom3z");
         Assertions.assertEquals(1, user.size());
 
     }
@@ -59,8 +59,8 @@ public class UserControllerTest {
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .post(Routes.USER_RESOURCE)
                 .content("{\n" +
-                        "    \"mail\": \"romeo.santos@gmail.com\",\n" +
                         "    \"username\": \"rodriguez\",\n" +
+                        "    \"mail\": \"romeo.santos@gmail.com\",\n" +
                         "    \"displayName\": \"romeo rodriguez santos\",\n" +
                         "    \"idCategoryUser\": 1\n" +
                         "}").contentType(MediaType.APPLICATION_JSON);
@@ -80,8 +80,8 @@ public class UserControllerTest {
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .post(Routes.USER_RESOURCE)
                 .content("{\n" +
-                        "    \"mail\": \"romeo@gmail.com\",\n" +
                         "    \"username\": \"romeito\",\n" +
+                        "    \"mail\": \"romeo@gmail.com\",\n" +
                         "    \"displayName\": \"romeo rodriguez santos\",\n" +
                         "    \"idCategoryUser\": 1\n" +
                         "}").contentType(MediaType.APPLICATION_JSON);

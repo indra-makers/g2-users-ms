@@ -30,17 +30,17 @@ public class UserRespository {
     private JdbcTemplate template;
 
     public void createUser (User user){
-        template.update("INSERT INTO public.tbl_users (mail, username, displayName, id_categoryUser) VALUES (?,?,?,?)",
-                user.getMail(), user.getUsername(), user.getDisplayName(), user.getIdCategoryUser());
+        template.update("INSERT INTO public.tbl_users (username, mail, displayName, id_categoryUser) VALUES (?,?,?,?)",
+                user.getUsername(), user.getMail(), user.getDisplayName(), user.getIdCategoryUser());
     }
 
     public List<User> findUserByMail (String mail){
-        return template.query("SELECT mail, username, displayName, id_categoryUser FROM public.tbl_users WHERE mail=?",
+        return template.query("SELECT username, mail, displayName, id_categoryUser FROM public.tbl_users WHERE mail=?",
                 new UserRowMapper(), mail);
     }
 
     public List<User> findUserByUsername (String username){
-        return template.query("SELECT mail, username, displayName, id_categoryUser FROM public.tbl_users WHERE username=?",
+        return template.query("SELECT username, mail, displayName, id_categoryUser FROM public.tbl_users WHERE username=?",
                 new UserRowMapper(), username);
     }
 }

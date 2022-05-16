@@ -29,7 +29,7 @@ public class CategoryUserRepository {
     private JdbcTemplate template;
 
 
-    public List<CategoryUser> showAllCategoryUser(){
+    public List<CategoryUser> getCategories(){
         return template.query("SELECT id_categoryUser, nameCategoryUser FROM public.tbl_categoryUsers",
                 new CategoryUserRowMapper());
     }

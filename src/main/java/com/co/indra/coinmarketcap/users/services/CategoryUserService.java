@@ -14,5 +14,5 @@ public class CategoryUserService{
     @Autowired
     private CategoryUserRepository categoryUserRepository;
 
-    public List<CategoryUser> showCategory(){ return categoryUserRepository.showAllCategoryUser();  }
+    public List<CategoryUser> getCategories(){ return categoryUserRepository.getCategories();  }
 }

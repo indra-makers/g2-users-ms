@@ -18,8 +18,13 @@ public class CategoryUserController {
     @Autowired
     CategoryUserService categoryUserService;
 
+    /**
+     * localhost:8080/api/users-ms/categoryUsers
+     * GET /categoryUsers
+     * @return 200 OK
+     */
     @GetMapping
     public List<CategoryUser> showCategory(){
-        return categoryUserService.showCategory();
+        return categoryUserService.getCategories();
     }
 }
