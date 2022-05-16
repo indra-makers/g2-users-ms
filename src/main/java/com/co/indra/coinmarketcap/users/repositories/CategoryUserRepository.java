@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 class CategoryUserRowMapper implements RowMapper <CategoryUser>{
 
@@ -26,4 +27,10 @@ public class CategoryUserRepository {
 
     @Autowired
     private JdbcTemplate template;
+
+
+    public List<CategoryUser> showAllCategoryUser(){
+        return template.query("SELECT id_categoryUser, nameCategoryUser FROM public.tbl_categoryUsers",
+                new CategoryUserRowMapper());
+    }
 }
