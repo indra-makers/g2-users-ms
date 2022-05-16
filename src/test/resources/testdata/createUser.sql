@@ -1,0 +1,1 @@
+INSERT INTO public.tbl_users (username, mail, displayName, id_categoryUser) VALUES ('romeito', 'romeo.santos@gmail.com', 'romeo santos', 3)

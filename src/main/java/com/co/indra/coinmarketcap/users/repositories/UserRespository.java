@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 class UserRowMapper implements RowMapper<User>{
     @Override
@@ -27,4 +28,19 @@ public class UserRespository {
 
     @Autowired
     private JdbcTemplate template;
+
+    public void createUser (User user){
+        template.update("INSERT INTO public.tbl_users (username, mail, displayName, id_categoryUser) VALUES (?,?,?,?)",
+                user.getUsername(), user.getMail(), user.getDisplayName(), user.getIdCategoryUser());
+    }
+
+    public List<User> findUserByMail (String mail){
+        return template.query("SELECT username, mail, displayName, id_categoryUser FROM public.tbl_users WHERE mail=?",
+                new UserRowMapper(), mail);
+    }
+
+    public List<User> findUserByUsername (String username){
+        return template.query("SELECT username, mail, displayName, id_categoryUser FROM public.tbl_users WHERE username=?",
+                new UserRowMapper(), username);
+    }
 }
