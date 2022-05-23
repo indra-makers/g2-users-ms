@@ -112,17 +112,7 @@ public class UserControllerTest {
         Assertions.assertEquals("user100", userToAssert.getDisplayName());
         Assertions.assertEquals(1, userToAssert.getIdCategoryUser());
     }
-
-    @Test
-    @Sql("/testdata/createUser.sql")
-    public void findUserByUsernameBadPath() throws Exception {
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .get(Routes.USER_RESOURCE+Routes.USERNAME_PATH, 100);
-
-        MockHttpServletResponse response = mockMvc.perform(request).andReturn().getResponse();
-        Assertions.assertEquals("404", response.getStatus());
-    }
-
+    
     @Test
     @Sql("/testdata/createUser.sql")
     public void findUserByUsernameWhenUsernameNotExistPath() throws Exception {
