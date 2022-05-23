@@ -2,16 +2,22 @@ package com.co.indra.coinmarketcap.users.services;
 
 import com.co.indra.coinmarketcap.users.config.ErrorCodes;
 import com.co.indra.coinmarketcap.users.exceptions.BusinessException;
+import com.co.indra.coinmarketcap.users.exceptions.NotFoundException;
 import com.co.indra.coinmarketcap.users.model.entities.User;
 import com.co.indra.coinmarketcap.users.repositories.UserRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRespository userRespository;
+
 
     public void createUser(User user){
         if(!userRespository.findUserByMail(user.getMail()).isEmpty()){
@@ -21,5 +27,14 @@ public class UserService {
             throw new BusinessException(ErrorCodes.USERNAME_UNIQUE);
         }
         userRespository.createUser(user);
+    }
+
+    public User findUser(String username){
+        if(userRespository.findUserByUsername(username).isEmpty()){
+            throw new NotFoundException(ErrorCodes.USERNAME_NOT_FOUND.getMessage());
+        }
+        List<User> user = userRespository.findUserByUsername(username);
+        User userToList = new User(user.get(0).getUsername(), user.get(0).getDisplayName(), user.get(0).getMail(), user.get(0).getIdCategoryUser());
+        return (userToList);
     }
 }

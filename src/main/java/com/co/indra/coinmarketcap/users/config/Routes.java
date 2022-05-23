@@ -6,4 +6,6 @@ public class Routes {
     public static final String GET_CATEGORY_USER = ("/categoryUsers");
     public static final String CATEGORY_RESOURCE = ("/categoryUsers");
 
+    public static final String USERNAME_PATH = "/{username}";
+
 }

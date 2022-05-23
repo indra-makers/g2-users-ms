@@ -94,4 +94,48 @@ public class UserControllerTest {
         Assertions.assertEquals("002", error.getCode());
 
     }
+
+    @Test
+    @Sql("/testdata/createUser.sql")
+    public void findUserByUsernameHappyPath() throws Exception {
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get(Routes.USER_RESOURCE+Routes.USERNAME_PATH, "user100");
+
+        MockHttpServletResponse response = mockMvc.perform(request).andReturn().getResponse();
+        Assertions.assertEquals(200, response.getStatus());
+
+        List<User> user = userRespository.findUserByUsername("user100");
+        Assertions.assertEquals(1, user.size());
+        User userToAssert = user.get(0);
+        Assertions.assertEquals("user100", userToAssert.getUsername());
+        Assertions.assertEquals("user100@gmail.com", userToAssert.getMail());
+        Assertions.assertEquals("user100", userToAssert.getDisplayName());
+        Assertions.assertEquals(1, userToAssert.getIdCategoryUser());
+    }
+
+    @Test
+    @Sql("/testdata/createUser.sql")
+    public void findUserByUsernameBadPath() throws Exception {
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get(Routes.USER_RESOURCE+Routes.USERNAME_PATH, 100);
+
+        MockHttpServletResponse response = mockMvc.perform(request).andReturn().getResponse();
+        Assertions.assertEquals(500, response.getStatus());
+    }
+
+    @Test
+    @Sql("/testdata/createUser.sql")
+    public void findUserByUsernameWhenUsernameNotExistPath() throws Exception {
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get(Routes.USER_RESOURCE+Routes.USERNAME_PATH, "user101");
+
+        MockHttpServletResponse response = mockMvc.perform(request).andReturn().getResponse();
+        Assertions.assertEquals(404, response.getStatus());
+
+        String textResponse = response.getContentAsString();
+        ErrorResponse error = objectMapper.readValue(textResponse, ErrorResponse.class);
+        Assertions.assertEquals("404", error.getCode());
+        Assertions.assertEquals("The username is not found", error.getMessage());
+
+    }
 }

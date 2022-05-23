@@ -23,8 +23,8 @@ public class CustomExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ErrorResponse handleNotFoundException(MethodArgumentNotValidException exception) {
-        return new ErrorResponse("NOT_FOUND", exception.getMessage());
+    public ErrorResponse validationException(MethodArgumentNotValidException exception) {
+        return new ErrorResponse("BAD_PARAMS", exception.getMessage());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -32,5 +32,12 @@ public class CustomExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ErrorResponse handleException(Exception exception) {
         return new ErrorResponse("500", exception.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    @ExceptionHandler(NotFoundException.class)
+    public ErrorResponse handleNotFoundException(NotFoundException exception) {
+        return new ErrorResponse("404", exception.getMessage());
     }
 }

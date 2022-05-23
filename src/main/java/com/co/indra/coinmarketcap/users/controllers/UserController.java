@@ -4,10 +4,10 @@ import com.co.indra.coinmarketcap.users.config.Routes;
 import com.co.indra.coinmarketcap.users.model.entities.User;
 import com.co.indra.coinmarketcap.users.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
+import java.util.List;
 
 @RestController
 @RequestMapping(Routes.USER_RESOURCE)
@@ -27,5 +27,14 @@ public class UserController {
         userService.createUser(user);
     }
 
-
+    /**
+     * localhost:8080/api/users-ms/users/{username}
+     * GET /users/{username}
+     * @param username
+     * @return 200 OK
+     */
+    @GetMapping(Routes.USERNAME_PATH)
+    public User findUser(@PathVariable("username") String username){
+        return userService.findUser(username);
+    }
 }
