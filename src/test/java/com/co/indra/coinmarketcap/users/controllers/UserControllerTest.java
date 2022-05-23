@@ -120,7 +120,7 @@ public class UserControllerTest {
                 .get(Routes.USER_RESOURCE+Routes.USERNAME_PATH, 100);
 
         MockHttpServletResponse response = mockMvc.perform(request).andReturn().getResponse();
-        Assertions.assertEquals(500, response.getStatus());
+        Assertions.assertEquals("404", response.getStatus());
     }
 
     @Test
