@@ -92,27 +92,24 @@ public class UserControllerTest {
         String textResponse = response.getContentAsString();
         ErrorResponse error = objectMapper.readValue(textResponse, ErrorResponse.class);
         Assertions.assertEquals("002", error.getCode());
-
     }
 
     @Test
     @Sql("/testdata/createUser.sql")
     public void findUserByUsernameHappyPath() throws Exception {
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .get(Routes.USER_RESOURCE+Routes.USERNAME_PATH, "user100");
+                .get(Routes.USER_RESOURCE+Routes.USERNAME_PATH,"user200").contentType(MediaType.APPLICATION_JSON);
 
         MockHttpServletResponse response = mockMvc.perform(request).andReturn().getResponse();
         Assertions.assertEquals(200, response.getStatus());
 
-        List<User> user = userRespository.findUserByUsername("user100");
-        Assertions.assertEquals(1, user.size());
-        User userToAssert = user.get(0);
-        Assertions.assertEquals("user100", userToAssert.getUsername());
-        Assertions.assertEquals("user100@gmail.com", userToAssert.getMail());
-        Assertions.assertEquals("user100", userToAssert.getDisplayName());
-        Assertions.assertEquals(1, userToAssert.getIdCategoryUser());
+        User users = objectMapper.readValue(response.getContentAsString(), User.class);
+        Assertions.assertEquals("user200", users.getUsername());
+        Assertions.assertEquals("user200@gmail.com", users.getMail());
+        Assertions.assertEquals("user200", users.getDisplayName());
+        Assertions.assertEquals(1, users.getIdCategoryUser());
     }
-    
+
     @Test
     @Sql("/testdata/createUser.sql")
     public void findUserByUsernameWhenUsernameNotExistPath() throws Exception {
@@ -126,6 +123,5 @@ public class UserControllerTest {
         ErrorResponse error = objectMapper.readValue(textResponse, ErrorResponse.class);
         Assertions.assertEquals("404", error.getCode());
         Assertions.assertEquals("The username is not found", error.getMessage());
-
     }
 }

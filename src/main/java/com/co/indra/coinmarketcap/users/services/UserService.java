@@ -34,7 +34,6 @@ public class UserService {
             throw new NotFoundException(ErrorCodes.USERNAME_NOT_FOUND.getMessage());
         }
         List<User> user = userRespository.findUserByUsername(username);
-        User userToList = new User(user.get(0).getUsername(), user.get(0).getDisplayName(), user.get(0).getMail(), user.get(0).getIdCategoryUser());
-        return (userToList);
+        return  user.get(0);
     }
 }
