@@ -34,13 +34,6 @@ public class CategoryUserControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-    @Autowired
-    private RedisConnection redisConnection;
-
-    @BeforeEach
-    public void beforeEach() {
-        redisConnection.flushAll();
-    }
 
     @Test
     public void showAllCategoryUserHappy() throws Exception {
