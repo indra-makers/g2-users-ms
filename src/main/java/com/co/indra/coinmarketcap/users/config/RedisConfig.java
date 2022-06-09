@@ -78,7 +78,7 @@ public class RedisConfig {
     @Bean("expireOneMinute")
     @Primary
     public CacheManager getOneMinuteCache() {
-        return getCacheManagerByTtl(60l);
+        return getCacheManagerByTtl(180l);
     }
 
     @Bean("expire30Mins")
