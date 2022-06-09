@@ -34,14 +34,7 @@ public class UserControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired
-    private RedisConnection redisConnection;
-
-    @BeforeEach
-    public void beforeEach() {
-        redisConnection.flushAll();
-    }
+    private ObjectMapper objectMapper;''
 
     @Test
     public void createUserHappy() throws Exception {
