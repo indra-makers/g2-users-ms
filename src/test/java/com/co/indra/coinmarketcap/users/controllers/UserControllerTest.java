@@ -34,7 +34,7 @@ public class UserControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper objectMapper;''
+    private ObjectMapper objectMapper;
 
     @Test
     public void createUserHappy() throws Exception {
