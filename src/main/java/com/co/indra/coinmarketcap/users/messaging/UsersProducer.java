@@ -19,7 +19,7 @@ public class UsersProducer {
     public void sendUser(User user) {
         try {
             String message = objectMapper.writeValueAsString(user);
-            rabbitTemplate.convertAndSend("test_measures", message);
+            rabbitTemplate.convertAndSend("test_users", message);
         } catch (JsonProcessingException exc) {
             exc.printStackTrace();
         }
