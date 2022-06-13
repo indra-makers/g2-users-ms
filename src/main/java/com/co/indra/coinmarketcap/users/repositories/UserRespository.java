@@ -30,8 +30,8 @@ public class UserRespository {
     private JdbcTemplate template;
 
     public void createUser (User user){
-        template.update("INSERT INTO public.tbl_users (username, mail, displayName, id_categoryUser) VALUES (?,?,?,?)",
-                user.getUsername(), user.getMail(), user.getDisplayName(), user.getIdCategoryUser());
+        template.update("INSERT INTO public.tbl_users (username, mail, displayName, phone, id_categoryUser) VALUES (?,?,?,?,?)",
+                user.getUsername(), user.getMail(), user.getDisplayName(), user.getPhoneNumber(), user.getIdCategoryUser());
     }
 
     public List<User> findUserByMail (String mail){

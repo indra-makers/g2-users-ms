@@ -6,6 +6,7 @@ public class User implements Serializable {
     private String mail;
     private String username;
     private String displayName;
+    private String phoneNumber;
     private long idCategoryUser;
 
     public User() {
@@ -15,6 +16,14 @@ public class User implements Serializable {
         this.username = username;
         this.mail = mail;
         this.displayName = displayName;
+        this.idCategoryUser = idCategoryUser;
+    }
+
+    public User(String mail, String username, String displayName, String phoneNumber, long idCategoryUser) {
+        this.mail = mail;
+        this.username = username;
+        this.displayName = displayName;
+        this.phoneNumber = phoneNumber;
         this.idCategoryUser = idCategoryUser;
     }
 
@@ -48,5 +57,12 @@ public class User implements Serializable {
 
     public void setIdCategoryUser(long idCategoryUser) {
         this.idCategoryUser = idCategoryUser;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
