@@ -8,6 +8,8 @@ public class User implements Serializable {
     private String displayName;
     private long idCategoryUser;
 
+    private String phone;
+
     public User() {
     }
 
@@ -16,6 +18,14 @@ public class User implements Serializable {
         this.mail = mail;
         this.displayName = displayName;
         this.idCategoryUser = idCategoryUser;
+    }
+
+    public User(String mail, String username, String displayName, long idCategoryUser, String phone) {
+        this.mail = mail;
+        this.username = username;
+        this.displayName = displayName;
+        this.idCategoryUser = idCategoryUser;
+        this.phone = phone;
     }
 
     public String getMail() {
@@ -48,5 +58,13 @@ public class User implements Serializable {
 
     public void setIdCategoryUser(long idCategoryUser) {
         this.idCategoryUser = idCategoryUser;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
