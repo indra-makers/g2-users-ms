@@ -4,6 +4,7 @@ import com.co.indra.coinmarketcap.users.config.Routes;
 import com.co.indra.coinmarketcap.users.model.entities.User;
 import com.co.indra.coinmarketcap.users.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -33,7 +34,9 @@ public class UserController {
      * @param username
      * @return 200 OK
      */
+
     @GetMapping(Routes.USERNAME_PATH)
+    @Cacheable(value = "findUser", cacheManager = "expire30Mins", key = "{#username}", unless = "#result == null")
     public User findUser(@PathVariable("username") String username){
         return userService.findUser(username);
     }
